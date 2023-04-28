@@ -1,0 +1,16 @@
+name: Lint, Test & Deploy
+on: push
+jobs:
+  uniqueJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run test
+      - name: Deploy
+        run: npm run build
+      - name: All Done
+        run: echo "All Done"
