@@ -1,0 +1,32 @@
+name: Lint, Test & Deploy
+on: push
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node Modules
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+  Test:
+    needs: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node Modules
+        run: npm ci
+      - name: Test
+        run: npm run test
+  Deploy:
+    needs: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node Modules
+        run: npm ci
+      - name: Deploy
+        run: npm run build
